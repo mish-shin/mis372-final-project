@@ -30,7 +30,7 @@ export default function Dashboard() {
 
       // 1) Get basic accounts list
       const res = await fetch(
-        `http://localhost:5000/api/accounts?user_id=${encodeURIComponent(
+        `http://localhost:5001/api/accounts?user_id=${encodeURIComponent(
           userId
         )}`
       );
@@ -43,7 +43,7 @@ export default function Dashboard() {
         list.map(async (acct) => {
           try {
             const resDetails = await fetch(
-              `http://localhost:5000/api/accounts/${acct.account_id}`
+              `http://localhost:5001/api/accounts/${acct.account_id}`
             );
             const det = await resDetails.json();
             detailsById[acct.account_id] = det;
@@ -90,7 +90,7 @@ export default function Dashboard() {
   async function loadAccountDetails(accountId) {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/accounts/${accountId}`
+        `http://localhost:5001/api/accounts/${accountId}`
       );
       const data = await res.json();
 
@@ -147,7 +147,7 @@ export default function Dashboard() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/accounts/${selectedAccountId}/deposit`,
+        `http://localhost:5001/api/accounts/${selectedAccountId}/deposit`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -189,7 +189,7 @@ export default function Dashboard() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/accounts/${selectedAccountId}/withdraw`,
+        `http://localhost:5001/api/accounts/${selectedAccountId}/withdraw`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -229,7 +229,7 @@ export default function Dashboard() {
       const userInfo = await getBasicUserInfo();
       const userId = userInfo.sub;
 
-      const res = await fetch("http://localhost:5000/api/accounts", {
+      const res = await fetch("http://localhost:5001/api/accounts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -277,7 +277,7 @@ export default function Dashboard() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/accounts/${selectedAccountId}`,
+        `http://localhost:5001/api/accounts/${selectedAccountId}`,
         {
           method: "DELETE",
         }
