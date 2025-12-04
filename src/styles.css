@@ -335,6 +335,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
+  position:relative;
 }
 
 .app-title {
@@ -358,7 +359,7 @@ body {
   text-decoration: none;
   padding: 4px 2px;
   position: relative;
-   margin: 0 5px;
+  margin: 0 5px;
 }
 
 .nav-link::after {
@@ -376,7 +377,167 @@ body {
   width: 100%;
 }
 
-
 .app-main {
   flex: 1;
 }
+
+/* For inline error text on the Stocks page */
+.stocks-error {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #b91c1c;
+}
+
+/* Stronger emphasis text inside metrics */
+.stocks-strong {
+  font-weight: 600;
+}
+
+/* Reuse the positive/negative coloring from the demo app */
+.positive {
+  color: #2ed47a;
+}
+
+.negative {
+  color: #ff6b81;
+}
+
+/* Layout for Stocks page main section */
+.stocks-layout {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+  align-items: flex-start;
+  width: 100%; /* ensure it uses the whole container width */
+}
+
+/* Left input card – ~60% */
+.stocks-input-card {
+  flex: 3 1 0; /* ~60% of width */
+  min-width: 0; /* prevent overflow */
+}
+
+/* Right info panel – ~40% */
+.stocks-side-panel {
+  flex: 2 1 0; /* ~40% of width */
+  min-width: 0;
+}
+
+/* Make all text in the right-hand info card black */
+.stocks-side-panel,
+.stocks-side-panel .accounts-intro-text,
+.stocks-side-panel .stocks-side-list {
+  color: #111827;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 900px) {
+  .stocks-layout {
+    flex-direction: column;
+  }
+
+  .stocks-input-card,
+  .stocks-side-panel {
+    max-width: 100%;
+  }
+}
+
+/* Subtle info strip at top of Stocks form */
+.stocks-disclaimer {
+  position: relative;
+  margin-bottom: 16px;
+  padding: 10px 12px 10px 36px;
+  font-size: 12px;
+  color: #1f2937;              /* same dark text as headings */
+  border-radius: 8px;
+  background-color: #eff6ff;   /* very light blue */
+  border: 1px solid #bfdbfe;   /* soft blue border */
+}
+
+/* Small "info" badge to the left */
+.stocks-disclaimer::before {
+  content: "i";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Field grouping to keep label close to its input */
+.stocks-field {
+  margin-top: 14px;
+}
+
+/* Label styling aligned with dashboard typography */
+.stocks-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+/* Slight extra space above submit row */
+.stocks-submit-row {
+  margin-top: 20px;
+}
+
+/* Side panel text styling */
+.stocks-side-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+.stocks-side-list {
+  margin: 8px 0 12px;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+.stocks-side-list li + li {
+  margin-top: 4px;
+}
+
+/* Positioning for the sign-out button on the right side */
+.header-signout-button {
+  position: absolute;
+  right: 30px;               /* matches .container horizontal padding */
+  top: 50%;
+  transform: translateY(-50%);
+  
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;            /* black/charcoal text */
+  
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.header-signout-button:hover {
+  background-color: #eff6ff;   /* light blue hover (matches rest of app) */
+  border-color: #2563eb;       /* same blue highlight */
+  color: #2563eb;              /* blue text on hover */
+}
+
+
+
