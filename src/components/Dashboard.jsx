@@ -159,12 +159,6 @@ export default function Dashboard() {
         }
       );
 
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        console.error("Deposit failed:", errData);
-        alert(errData.error || "Deposit failed");
-        return;
-      }
 
       setDepositAmount("");
       await loadAccountDetails(selectedAccountId);
@@ -285,11 +279,30 @@ export default function Dashboard() {
       );
 
       if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        console.error("Delete account failed:", errData);
-        alert(errData.error || "Failed to delete account.");
-        return;
-      }
+  const errData = await res.json().catch(() => ({}));
+  console.error("Delete account failed:", errData);
+
+  // If backend detects remaining balance
+  if (errData.error?.includes("non-zero balance")) {
+    const bal = errData.balance ?? 0;
+
+    const goTransfer = window.confirm(
+      `⚠️ This account cannot be deleted because it still has $${bal.toFixed(
+        2
+      )} remaining.\n\nWould you like to go to the Transfers page to move your money?`
+    );
+
+    if (goTransfer) {
+      window.location.href = "/Transfers"; // works once page exists
+    }
+
+    return;
+  }
+
+  // Other errors
+  alert(errData.error || "Failed to delete account.");
+  return;
+}
 
       // Remove from local state
       const remaining = accounts.filter(

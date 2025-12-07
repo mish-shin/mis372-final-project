@@ -329,32 +329,55 @@ app.post('/api/accounts/:accountId/withdraw', async (req, res) => {
   }
 });
 
-// DELETE /api/accounts/:accountId
-// Deletes all transactions for that account, then deletes the account itself.
+// SAFE DELETE: Prevent deleting accounts with remaining balance
 app.delete('/api/accounts/:accountId', async (req, res) => {
   try {
     const { accountId } = req.params;
-    const id = Number(accountId);
 
-    if (!id || Number.isNaN(id)) {
+    // Validate accountId
+    if (!accountId || isNaN(Number(accountId))) {
       return res.status(400).json({ error: "Invalid accountId parameter." });
     }
 
-    // First delete all transactions tied to this account
-    await Transaction.destroy({
-      where: { account_id: id }
-    });
-
-    // Then delete the account
-    const deletedCount = await Account.destroy({
-      where: { account_id: id }
-    });
-
-    if (deletedCount === 0) {
+    // 1️⃣ Look up the account
+    const account = await Account.findByPk(accountId);
+    if (!account) {
       return res.status(404).json({ error: "Account not found." });
     }
 
-    return res.json({ message: "Account and related transactions deleted." });
+    // 2️⃣ Get all transactions for this account
+    const transactions = await Transaction.findAll({
+      where: { account_id: accountId }
+    });
+
+    // 3️⃣ Compute balance
+    const balance = transactions.reduce((total, tx) => {
+      if (tx.transaction_type === "deposit") return total + Number(tx.amount);
+      if (tx.transaction_type === "withdraw") return total - Number(tx.amount);
+      return total;
+    }, 0);
+
+    // 4️⃣ Prevent deletion unless balance is exactly zero
+    if (balance !== 0) {
+      return res.status(400).json({
+        error: "Cannot delete account with a non-zero balance.",
+        balance: balance,
+        message: "Please withdraw or transfer all remaining money before closing this account."
+      });
+    }
+
+    // 5️⃣ Delete transactions FIRST (safe since balance is 0)
+    await Transaction.destroy({
+      where: { account_id: accountId }
+    });
+
+    // 6️⃣ Now delete the account
+    await Account.destroy({
+      where: { account_id: accountId }
+    });
+
+    return res.json({ message: "Account deleted successfully." });
+
   } catch (err) {
     console.error("Error deleting account:", err);
     return res.status(500).json({ error: "Internal server error." });

@@ -540,4 +540,163 @@ body {
 }
 
 
+/* ================================
+   ASSISTANT PAGE LAYOUT
+================================ */
 
+.assistant-layout {
+  display: flex;
+  gap: 32px;
+  margin-top: 0px !important;
+  align-items: flex-start; /* ensures both columns align at the top */
+}
+
+.assistant-left {
+  flex: 3;
+
+}
+
+.assistant-right {
+  flex: 2;
+  margin-top: 0px !important;
+
+}
+
+/* Reduce spacing above the right panel title */
+.recent-title {
+  margin-top: 0px !important;
+}
+
+
+/* Input spacing */
+.assistant-input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.assistant-ask-button {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+/* Quick Questions Section */
+.assistant-quick-section {
+  margin-top: 20px;
+}
+
+.assistant-quick-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.assistant-quick-button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.assistant-quick-button:hover {
+  background-color: #eff6ff;
+  border-color: #2563eb;
+}
+
+/* How it works info card */
+.assistant-info-card {
+  margin-top: 0px;
+  padding: 18px;
+  border-radius: 14px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.assistant-info-list {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* Response box */
+.assistant-response-box {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  min-height: 200px;
+}
+
+.assistant-response-title {
+  text-align: center;
+  margin-top: 40px;      /* replaces inline margin */
+  margin-bottom: 12px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+
+.assistant-placeholder {
+  color: #6b7280;
+}
+
+.assistant-error-text {
+  color: red;
+}
+
+.assistant-answer {
+  line-height: 1.5;
+  font-size: 15px;
+  color: #1f2937;
+}
+
+
+/* Reduce top padding ONLY on the assistant page */
+.assistant-container {
+  padding-top: 10px !important; /* was 30px */
+}
+
+
+.assistant-section-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 40px 0 20px 0;
+}
+
+/* ===== AI RESPONSE FORMATTING ===== */
+
+.ai-bold {
+  font-weight: 700;
+  color: #111827; /* same as dashboard text */
+}
+
+.ai-heading {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  color: #1f2937;
+}
+
+.ai-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 14px 0;
+}
+
+.ai-bullet {
+  margin-left: 12px;
+  margin-bottom: 4px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.assistant-answer {
+  line-height: 1.6;
+  font-size: 15px;
+  color: #1f2937;
+}
