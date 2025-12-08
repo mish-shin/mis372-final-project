@@ -1,2 +1,2 @@
-username: suleveer@gmail.com
+username: test@test.com
 pass: Abcdef123

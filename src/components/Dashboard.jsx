@@ -5,6 +5,7 @@ import AccountCards from "./AccountCards";
 
 export default function Dashboard() {
   const { state, signIn, getBasicUserInfo } = useAuthContext();
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const [showBalance, setShowBalance] = useState(true); // global balance visibility
   const [accounts, setAccounts] = useState([]); // all accounts for this user (with balance)
@@ -30,7 +31,7 @@ export default function Dashboard() {
 
       // 1) Get basic accounts list
       const res = await fetch(
-        `http://localhost:5001/api/accounts?user_id=${encodeURIComponent(
+        `${BACKEND_URL}/api/accounts?user_id=${encodeURIComponent(
           userId
         )}`
       );
@@ -43,7 +44,7 @@ export default function Dashboard() {
         list.map(async (acct) => {
           try {
             const resDetails = await fetch(
-              `http://localhost:5001/api/accounts/${acct.account_id}`
+              `${BACKEND_URL}/api/accounts/${acct.account_id}`
             );
             const det = await resDetails.json();
             detailsById[acct.account_id] = det;
@@ -90,7 +91,7 @@ export default function Dashboard() {
   async function loadAccountDetails(accountId) {
     try {
       const res = await fetch(
-        `http://localhost:5001/api/accounts/${accountId}`
+        `${BACKEND_URL}/api/accounts/${accountId}`
       );
       const data = await res.json();
 
@@ -147,7 +148,7 @@ export default function Dashboard() {
 
     try {
       const res = await fetch(
-        `http://localhost:5001/api/accounts/${selectedAccountId}/deposit`,
+        `${BACKEND_URL}/api/accounts/${selectedAccountId}/deposit`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -158,12 +159,6 @@ export default function Dashboard() {
         }
       );
 
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        console.error("Deposit failed:", errData);
-        alert(errData.error || "Deposit failed");
-        return;
-      }
 
       setDepositAmount("");
       await loadAccountDetails(selectedAccountId);
@@ -189,7 +184,7 @@ export default function Dashboard() {
 
     try {
       const res = await fetch(
-        `http://localhost:5001/api/accounts/${selectedAccountId}/withdraw`,
+        `${BACKEND_URL}/api/accounts/${selectedAccountId}/withdraw`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -229,7 +224,7 @@ export default function Dashboard() {
       const userInfo = await getBasicUserInfo();
       const userId = userInfo.sub;
 
-      const res = await fetch("http://localhost:5001/api/accounts", {
+      const res = await fetch(`${BACKEND_URL}/api/accounts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -277,18 +272,37 @@ export default function Dashboard() {
 
     try {
       const res = await fetch(
-        `http://localhost:5001/api/accounts/${selectedAccountId}`,
+        `${BACKEND_URL}/api/accounts/${selectedAccountId}`,
         {
           method: "DELETE",
         }
       );
 
       if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        console.error("Delete account failed:", errData);
-        alert(errData.error || "Failed to delete account.");
-        return;
-      }
+  const errData = await res.json().catch(() => ({}));
+  console.error("Delete account failed:", errData);
+
+  // If backend detects remaining balance
+  if (errData.error?.includes("non-zero balance")) {
+    const bal = errData.balance ?? 0;
+
+    const goTransfer = window.confirm(
+      `⚠️ This account cannot be deleted because it still has $${bal.toFixed(
+        2
+      )} remaining.\n\nWould you like to go to the Transfers page to move your money?`
+    );
+
+    if (goTransfer) {
+      window.location.href = "/Transfers"; // works once page exists
+    }
+
+    return;
+  }
+
+  // Other errors
+  alert(errData.error || "Failed to delete account.");
+  return;
+}
 
       // Remove from local state
       const remaining = accounts.filter(
@@ -319,19 +333,21 @@ export default function Dashboard() {
   }
 
   // Not logged in
-  if (!state.isAuthenticated) {
-    return (
-      <div className="container">
-        <h1 className="title">Please log in</h1>
-        <p className="subtitle">
-          You need to sign in with your Asgardeo account to view your dashboard.
-        </p>
-        <button className="action-button" onClick={() => signIn()}>
-          Log in
-        </button>
-      </div>
-    );
-  }
+if (!state.isAuthenticated) {
+  return (
+    <div className="container">
+      <h1 className="title">Welcome</h1>
+      <p className="subtitle">
+        Sign in or create a new account to access your dashboard.
+      </p>
+
+      <button className="action-button" onClick={() => signIn()}>
+        Log in / Sign up
+      </button>
+    </div>
+  );
+}
+
 
   if (loading) {
     return (
