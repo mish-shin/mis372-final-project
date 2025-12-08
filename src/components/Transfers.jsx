@@ -24,7 +24,7 @@ export default function Transfers() {
 
       // 1) Get list of accounts for this user
       const res = await fetch(
-        `http://localhost:5000/api/accounts?user_id=${encodeURIComponent(
+        `http://localhost:5001/api/accounts?user_id=${encodeURIComponent(
           userId
         )}`
       );
@@ -36,7 +36,7 @@ export default function Transfers() {
         list.map(async (acct) => {
           try {
             const resDetails = await fetch(
-              `http://localhost:5000/api/accounts/${acct.account_id}`
+              `http://localhost:5001/api/accounts/${acct.account_id}`
             );
             const det = await resDetails.json();
             return { ...acct, balance: det.balance };
@@ -101,7 +101,7 @@ export default function Transfers() {
     try {
       // 1️⃣ Withdraw from the "from" account
       const withdrawRes = await fetch(
-        `http://localhost:5000/api/accounts/${fromAccountId}/withdraw`,
+        `http://localhost:5001/api/accounts/${fromAccountId}/withdraw`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -123,7 +123,7 @@ export default function Transfers() {
 
       // 2️⃣ Deposit into the "to" account
       const depositRes = await fetch(
-        `http://localhost:5000/api/accounts/${toAccountId}/deposit`,
+        `http://localhost:5001/api/accounts/${toAccountId}/deposit`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
