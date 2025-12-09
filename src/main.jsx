@@ -7,8 +7,8 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider
         config={ {
-            signInRedirectURL: "http://localhost:5173/",
-            signOutRedirectURL: "http://localhost:5173/",
+            signInRedirectURL: "https://mis372-final-project-final-submission-fe.onrender.com/",
+            signOutRedirectURL: "https://mis372-final-project-final-submission-fe.onrender.com/",
             clientID: "tcnir27KlgOoBuMMgqZOgIpAJbca",
             baseUrl: "https://api.asgardeo.io/t/orgpe2w7",
             scope: [ "openid","profile" ]
