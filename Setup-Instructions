@@ -48,8 +48,8 @@ npm install
 Changes to main.jsx
 
 In src/main.jsx, update the AuthProvider component with the following URLs:
-signInRedirectURL: "https://localhost:5173/"
-signOutRedirectURL: "https://localhost:5173/"
+signInRedirectURL: "http://localhost:5173/"
+signOutRedirectURL: "http://localhost:5173/"
 
 ----------------------------------------------------------------------------------
 Running the Project
