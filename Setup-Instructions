@@ -1,54 +1,54 @@
-<!-- Environment Setup Instructions
+-- <!-- Environment Setup Instructions
 
-This project requires two separate environment files:
-1. backend/.env  
-2. .env in the project root (frontend)
+-- This project requires two separate environment files:
+-- 1. backend/.env  
+-- 2. .env in the project root (frontend)
 
-These files contain private configuration values and must not be pushed to GitHub.
------------------------------------------------------------------------------------
-Backend .env (backend/.env)
+-- These files contain private configuration values and must not be pushed to GitHub.
+-- -----------------------------------------------------------------------------------
+-- Backend .env (backend/.env)
 
-Create a file at:
-backend/.env
+-- Create a file at:
+-- backend/.env
 
-Add the following variables:
-DATABASE_URL=postgresql://bank_7xl6_user:T4SCf3boV7Tmg4AO04Nkt0yF0W9g2UwX@dpg-d4edpt75r7bs73fnq7h0-a.oregon-postgres.render.com/bank_7xl6
-PORT=5001
-----------------------------------------------------------------------------------
-Frontend .env (.env at project root)
+-- Add the following variables:
+-- DATABASE_URL=postgresql://bank_7xl6_user:T4SCf3boV7Tmg4AO04Nkt0yF0W9g2UwX@dpg-d4edpt75r7bs73fnq7h0-a.oregon-postgres.render.com/bank_7xl6
+-- PORT=5001
+-- ----------------------------------------------------------------------------------
+-- Frontend .env (.env at project root)
 
-Create a file at:
-.env
+-- Create a file at:
+-- .env
 
-Add the following variables:
-VITE_MASSIVE_API_KEY=fkSvxNMBJ2BZHdPS9tdP9nMXadST8D8V
-VITE_BACKEND_URL=http://localhost:5001
+-- Add the following variables:
+-- VITE_MASSIVE_API_KEY=fkSvxNMBJ2BZHdPS9tdP9nMXadST8D8V
+-- VITE_BACKEND_URL=http://localhost:5001
 
-VITE_MODEL_DEPLOYMENT_NAME=bankapp-AI
-VITE_AZURE_API_KEY= aiDHm92bxrvdDbOw2m940Dzf0CLMdNOYvBZiZtVmNbN6KjmX9emcJQQJ99BLACHYHv6XJ3w3AAAAACOGZDKi
-VITE_PROJECT_ENDPOINT= https://mis372-final-project-resource.cognitiveservices.azure.com/openai/deployments/bankapp-AI/chat/completions?api-version=2025-01-01-preview
-----------------------------------------------------------------------------------
-Git Ignore Requirements
+-- VITE_MODEL_DEPLOYMENT_NAME=bankapp-AI
+-- VITE_AZURE_API_KEY= aiDHm92bxrvdDbOw2m940Dzf0CLMdNOYvBZiZtVmNbN6KjmX9emcJQQJ99BLACHYHv6XJ3w3AAAAACOGZDKi
+-- VITE_PROJECT_ENDPOINT= https://mis372-final-project-resource.cognitiveservices.azure.com/openai/deployments/bankapp-AI/chat/completions?api-version=2025-01-01-preview
+-- ----------------------------------------------------------------------------------
+-- Git Ignore Requirements
 
-Ensure these lines are in .gitignore:
-.env  
-*.env  
-backend/.env  
+-- Ensure these lines are in .gitignore:
+-- .env  
+-- *.env  
+-- backend/.env  
 
-----------------------------------------------------------------------------------
-Installing Dependencies
+-- ----------------------------------------------------------------------------------
+-- Installing Dependencies
 
-Frontend:
-npm install
+-- Frontend:
+-- npm install
 
-Backend:
-cd backend  
-npm install
-----------------------------------------------------------------------------------
-Running the Project
+-- Backend:
+-- cd backend  
+-- npm install
+-- ----------------------------------------------------------------------------------
+-- Running the Project
 
-Backend:
-npm run dev
+-- Backend:
+-- npm run dev
 
 Frontend:
 npm run dev
