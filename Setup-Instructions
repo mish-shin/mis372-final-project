@@ -53,3 +53,17 @@ npm run dev
 Frontend:
 npm run dev
 ----------------------------------------------------------------------------------
+Low-Code Platform Links
+
+BudiBase Accounts Link: https://xfjft8yv.budibase.app/app/default%20workspace/aureality-admin#/Accounts
+BudiBase Transactions Link: https://xfjft8yv.budibase.app/app/default%20workspace/aureality-admin#/Transactions
+
+----------------------------------------------------------------------------------
+Database Connection Info
+
+Hostname: dpg-d4edpt75r7bs73fnq7h0-a
+Database: bank_7xl6
+Username: bank_7xl6_user
+Password: T4SCf3boV7Tmg4AO04Nkt0yF0W9g2UwX
+Port: 5432
+External Database URL: postgresql://bank_7xl6_user:T4SCf3boV7Tmg4AO04Nkt0yF0W9g2UwX@dpg-d4edpt75r7bs73fnq7h0-a.oregon-postgres.render.com/bank_7xl6
