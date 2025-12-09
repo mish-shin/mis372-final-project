@@ -54,6 +54,8 @@ signOutRedirectURL: "http://localhost:5173/"
 ----------------------------------------------------------------------------------
 Running the Project
 
+Please make sure to save your project before running the commands below.
+
 Backend:
 npm run dev
 
