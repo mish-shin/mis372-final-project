@@ -1,4 +1,4 @@
-<!-- Environment Setup Instructions
+Setup Instructions to Run the Project Locally
 
 This project requires two separate environment files:
 1. backend/.env  
@@ -22,7 +22,7 @@ Create a file at:
 
 Add the following variables:
 VITE_MASSIVE_API_KEY=fkSvxNMBJ2BZHdPS9tdP9nMXadST8D8V
-VITE_BACKEND_URL=https://mis372-final-project-final-submission.onrender.com
+VITE_BACKEND_URL=https://localhost:5001
 
 VITE_MODEL_DEPLOYMENT_NAME=bankapp-AI
 VITE_AZURE_API_KEY= aiDHm92bxrvdDbOw2m940Dzf0CLMdNOYvBZiZtVmNbN6KjmX9emcJQQJ99BLACHYHv6XJ3w3AAAAACOGZDKi
@@ -44,6 +44,13 @@ npm install
 Backend:
 cd backend  
 npm install
+----------------------------------------------------------------------------------
+Changes to main.jsx
+
+In src/main.jsx, update the AuthProvider component with the following URLs:
+signInRedirectURL: "https://localhost:5173/"
+signOutRedirectURL: "https://localhost:5173/"
+
 ----------------------------------------------------------------------------------
 Running the Project
 
